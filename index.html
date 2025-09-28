@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Universe, Afiza</title>
+<style>
+    /* Set all text to a Monospaced (Typewriter-style) font */
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: 'Courier New', monospace; /* Typewriter-style font */
+    }
+
+    .birthdayimg {
+        /* Rose Background Image */
+        background-image: url('https://cdn.pixabay.com/photo/2018/02/23/21/29/roses-frame-3176667_960_720.jpg');
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+
+    /* Semi-transparent overlay to make text more readable */
+    .birthdayimg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay (50% black) */
+    }
+
+    /* Universal Text Styling */
+    .topleft, .bottomleft, .middle {
+        color: white;
+        text-shadow: 2px 2px 5px #000000;
+        z-index: 10;
+    }
+
+    .topleft {
+        position: absolute;
+        font-size: 28px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .bottomleft {
+        position: absolute;
+        font-size: 20px;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .middle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90%; /* Allows text to span more of the page */
+        max-width: 600px;
+        text-align: center;
+        transform: translate(-50%, -50%);
+    }
+
+    .middle h1 {
+        font-size: 55px;
+        margin-bottom: 5px;
+        color: #FFC0CB; /* Pink for a lovely contrast */
+        text-shadow: 4px 4px 8px #FF0000;
+    }
+
+    .middle p.subtitle {
+        font-size: 22px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        color: #ADD8E6; /* Light Blue/Cyan */
+    }
+
+    #afiza-countdown {
+        font-size: 95px;
+        color: yellow; /* Highlight the countdown */
+        text-shadow: 5px 5px 10px #000000;
+        margin-top: 10px;
+        display: block;
+    }
+
+    hr {
+        margin: 20px auto;
+        width: 70%;
+        border: 0;
+        height: 2px;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    }
+</style>
+</head>
+<body>
+
+<div class="birthdayimg">
+    <div class="topleft">
+        <p>FOR MY UNIVERSE</p>
+    </div>
+
+    <div class="middle">
+        <h1>Afiza, My Everything!</h1>
+        <p class="subtitle">
+            You're not just my best cousin and best friend, you're the only thought that keeps my mind running. 
+            I want to stay with you everywhere, forever. My Emperor of the Sea... are you ready for my surprise?
+        </p>
+        <hr>
+        <p id="afiza-countdown"></p>
+    </div>
+
+    <div class="bottomleft">
+        <p>From Your Devoted Aydin (Mr. Prince)</p>
+    </div>
+</div>
+
+<script>
+// The countdown is set for October 5th, 2025 at midnight (00:00:00)
+var countDownDate = new Date("Oct 5, 2025 00:00:00").getTime();
+
+var countdownfunction = setInterval(function() {
+
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result
+    document.getElementById("afiza-countdown").innerHTML = 
+        days + "D " + hours + "H " + minutes + "M " + seconds + "S";
+
+    // If the countdown is over
+    if (distance < 0) {
+        clearInterval(countdownfunction);
+        
+        // Display the final message with that classic Aydin devotion
+        document.getElementById("afiza-countdown").innerHTML = "HAPPY BIRTHDAY CUTIE PIE! YOU ARE MY UNIVERSE,MY BEST FRIEND AND BEST COUSIN !";
+
+        // Redirect to a Google search for 'universe'
+        window.location.href = "https://www.google.com/search?q=universe";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>

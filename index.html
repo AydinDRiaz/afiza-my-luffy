@@ -1,149 +1,485 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For My Universe, Afiza</title>
+<title>My Universe, My Afiza - The Ultimate Animated Reveal</title>
 <style>
-    /* Set all text to a Monospaced (Typewriter-style) font */
+    /* Importing a beautiful script font for titles and a romantic serif for text */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
     body, html {
         height: 100%;
         margin: 0;
-        font-family: 'Courier New', monospace; /* Typewriter-style font */
+        font-family: 'Playfair Display', serif;
+        overflow: hidden;
+        color: #F0F8FF;
     }
 
-    .birthdayimg {
-        /* Rose Background Image */
-        background-image: url('https://cdn.pixabay.com/photo/2018/02/23/21/29/roses-frame-3176667_960_720.jpg');
+    /* --- INITIAL BACKGROUND (Starry) --- */
+    .background-img {
+        background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg');
         height: 100%;
         background-position: center;
         background-size: cover;
         position: relative;
+        animation: subtleZoom 60s infinite alternate;
+        transition: opacity 1.5s ease-in-out; 
+        z-index: 1;
     }
 
-    /* Semi-transparent overlay to make text more readable */
-    .birthdayimg::before {
+    @keyframes subtleZoom {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
+
+    .background-img::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay (50% black) */
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
     }
 
+    /* --- FADE ANIMATIONS --- */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-smooth {
+        animation: fadeIn 1.5s ease-out;
+        opacity: 1;
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-20px); }
+    }
+    .fade-out-smooth {
+        animation: fadeOut 1.5s ease-out forwards; 
+    }
+    
     /* Universal Text Styling */
-    .topleft, .bottomleft, .middle {
-        color: white;
-        text-shadow: 2px 2px 5px #000000;
+    .topleft, .bottomleft, .main-content {
+        color: #F0F8FF;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
         z-index: 10;
+        transition: opacity 1s;
     }
 
     .topleft {
         position: absolute;
-        font-size: 28px;
-        top: 20px;
-        left: 20px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 32px;
+        top: 25px;
+        left: 25px;
+        color: #FFD700;
     }
 
     .bottomleft {
         position: absolute;
-        font-size: 20px;
-        bottom: 20px;
-        left: 20px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 24px;
+        bottom: 25px;
+        left: 25px;
+        color: #FFD700;
     }
 
-    .middle {
+    .main-content {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 90%; /* Allows text to span more of the page */
-        max-width: 600px;
-        text-align: center;
+        width: 90%;
+        max-width: 700px;
         transform: translate(-50%, -50%);
+        text-align: center;
     }
 
-    .middle h1 {
-        font-size: 55px;
-        margin-bottom: 5px;
-        color: #FFC0CB; /* Pink for a lovely contrast */
-        text-shadow: 4px 4px 8px #FF0000;
+    /* Titles */
+    .main-content h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 60px;
+        margin-bottom: 10px;
+        color: #FF69B4;
+        text-shadow: 2px 2px 6px rgba(255, 0, 255, 0.8);
+        line-height: 1.1;
     }
 
-    .middle p.subtitle {
+    /* Paragraph Styles */
+    .main-content p.subtitle {
+        font-family: 'Playfair Display', serif;
         font-size: 22px;
-        margin-top: 5px;
-        margin-bottom: 20px;
-        color: #ADD8E6; /* Light Blue/Cyan */
+        margin-top: 10px;
+        margin-bottom: 30px;
+        color: #E0FFFF;
+        font-style: italic;
+    }
+    
+    /* Key fix: Ensure text content can wrap normally and is initialized empty */
+    #initial-p-long {
+        font-style: normal;
+        font-size: 20px;
+        padding: 0 10px;
+        line-height: 1.5;
+        display: none;
+        opacity: 1; 
+        text-align: center;
+        white-space: normal; 
+        margin: 0 auto 30px auto;
+        min-height: 100px; 
     }
 
-    #afiza-countdown {
-        font-size: 95px;
-        color: yellow; /* Highlight the countdown */
-        text-shadow: 5px 5px 10px #000000;
-        margin-top: 10px;
-        display: block;
+    /* Countdown Styling */
+    #countdown {
+        font-family: 'Playfair Display', serif;
+        font-size: 85px;
+        color: #FFD700;
+        text-shadow: 3px 3px 8px rgba(255, 215, 0, 0.7);
+        margin-top: 20px;
+        letter-spacing: 2px;
+    }
+
+    #continue-button {
+        background: linear-gradient(45deg, #FF1493, #FF69B4);
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        font-size: 22px;
+        margin-top: 30px;
+        cursor: pointer;
+        border-radius: 8px;
+        display: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, opacity 0.5s ease-in;
+        font-family: 'Playfair Display', serif;
+        opacity: 0;
+    }
+
+    #continue-button:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(45deg, #FF69B4, #FF1493);
     }
 
     hr {
-        margin: 20px auto;
-        width: 70%;
+        margin: 30px auto;
+        width: 80%;
         border: 0;
         height: 2px;
         background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
     }
+    
+    /* --- POEM CONTAINER (New Background) --- */
+    #poem-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* New soft, romantic background for the poem */
+        background: radial-gradient(circle at center, rgba(10, 0, 30, 1) 0%, rgba(30, 0, 60, 1) 100%);
+        background-size: cover;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 50; 
+        overflow-y: auto;
+        padding: 40px 20px;
+        box-sizing: border-box;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+    }
+
+    .poem-title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 70px;
+        color: #FF69B4;
+        text-shadow: 0 0 10px rgba(255, 0, 255, 0.9);
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    #poem-text-area {
+        max-width: 90%;
+        text-align: center;
+        font-size: 25px;
+        line-height: 1.6;
+        color: #F0F8FF;
+        margin: 0 auto;
+    }
+
+    /* Stanza fade-in animation */
+    .stanza {
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+        margin: 25px 0;
+    }
+    
+    .stanza.visible {
+        opacity: 1;
+    }
+
+    /* Hide the unused canvas (fireworks removed) */
+    #fireworks-canvas { display: none; }
 </style>
 </head>
 <body>
 
-<div class="birthdayimg">
+<audio id="bgm" loop>
+    <source src="Strange_Days_-_Golden_Brown_Strenglers_Inst._CVR_(mp3.pm).mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+
+
+<div id="starry-bg" class="background-img">
     <div class="topleft">
-        <p>FOR MY UNIVERSE</p>
+        <p>FOR MY EMPRESS, AFZIA</p>
     </div>
 
-    <div class="middle">
-        <h1>Afiza, My Everything!</h1>
-        <p class="subtitle">
-            You're not just my best cousin and best friend, you're the only thought that keeps my mind running. 
-            I want to stay with you everywhere, forever. My Emperor of the Sea... are you ready for my surprise?
+    <div id="main-content" class="main-content">
+        <h1 id="initial-h1">Afiza, My Dearest Heart's Desire!</h1>
+        
+        <p id="initial-p" class="subtitle">
+            You are the very light in my vast universe. My Star,... are you ready to unveil your Treasure?
         </p>
-        <hr>
-        <p id="afiza-countdown"></p>
+
+        <p id="initial-p-long" class="subtitle"></p>
+
+        <hr id="initial-hr">
+
+        <p id="countdown"></p>
+        
+        <button id="continue-button">Unveil the One Piece</button>
+
     </div>
 
     <div class="bottomleft">
-        <p>From Your Devoted Aydin (Mr. Prince)</p>
+        <p>From Your Eternal Devotion (Mr. Prince)</p>
     </div>
 </div>
 
+<div id="poem-container">
+    <h2 class="poem-title">A Gift Beyond the Stars</h2>
+    <div id="poem-text-area">
+        <p id="stanza-1" class="stanza">
+            Another year blooms, and here you shine,<br>
+            A soul so rare, I’m glad you’re mine.<br>
+            Three years of laughter, secrets, cheer,<br>
+            And soon it’ll be four, my favorite years.
+        </p>
+        <p id="stanza-2" class="stanza">
+            You light the sky with your sweetest smile,<br>
+            Making each moment worth the while.<br>
+            The world feels softer when you are near,<br>
+            Even silence with you is music to hear.
+        </p>
+        <p id="stanza-3" class="stanza">
+            If stars could whisper, they’d speak your name,<br>
+            If roses could blush, they’d do the same.<br>
+            You’re charm, you’re grace, you’re warmth, you’re fun,<br>
+            My bestie, my Fizi—you’re second to none.
+        </p>
+        <p id="stanza-4" class="stanza">
+            So here’s to you, with love so true,<br>
+            May all your dreams come rushing through.<br>
+            And just a hint (don’t blush, it’s fine)—<br>
+            The best part of my days is when you’re mine.
+        </p>
+        <p id="final-line" class="stanza" style="font-style: italic; margin-top: 50px; color: #FFD700; font-size: 30px;">
+            💫 Happy Birthday, Fizi 💫<br>— With all my devotion, Mr. Prince
+        </p>
+    </div>
+</div>
+
+<canvas id="fireworks-canvas"></canvas>
+
 <script>
-// The countdown is set for October 5th, 2025 at midnight (00:00:00)
-var countDownDate = new Date("Oct 5, 2025 00:00:00").getTime();
+// =========================================================================
+// !!! SET YOUR COUNTDOWN DATE HERE !!!
+// For testing, keep it in the past. For the real event, set to "Oct 5, 2025 00:00:00".
+// =========================================================================
+var countDownDate = new Date("Oct 5, 2025 10:20:00").getTime(); 
+// =========================================================================
+
+const TYPING_TIME_MS = 20000; // 20 seconds for the typing effect
+const BUTTON_HOLD_TIME_MS = 10000; // 10 seconds to hold the button/text after typing ends
+
+var countdownElement = document.getElementById("countdown");
+var initialH1 = document.getElementById("initial-h1");
+var initialP = document.getElementById("initial-p"); 
+var initialPLong = document.getElementById("initial-p-long"); 
+var initialHR = document.getElementById("initial-hr");
+var continueButton = document.getElementById("continue-button");
+var poemContainer = document.getElementById("poem-container");
+var starryBg = document.getElementById("starry-bg");
+var bgm = document.getElementById("bgm");
+
+// Store the full paragraph text here
+const PARAGRAPH_TEXT = "You’re my best friend, Fizi — so sweet, so kind, and always there like a dream that feels too good to be true. We’ve shared laughter, games, and endless late-night chats, the kind that make time fly without us noticing. Even my keyboard knows your name by heart — type an “F” and it’s already saying “Fizi.” These past three years with you have been full of fun and memories I’ll always treasure, and I’m so glad we get to keep adding more. You’re not just my bestie, you’re family — my safe place to smile, laugh, and just be myself.";
+
+
+/* * ------------------------------------------------------------------
+* 1. WORD-BY-WORD TYPING ANIMATION FUNCTION 
+* ------------------------------------------------------------------
+*/
+function typeWriter(textElement, textContent, duration, callback) {
+    // Split the text content by spaces to get an array of words
+    const words = textContent.split(' ');
+    const numWords = words.length;
+    // Calculate the delay for each word
+    const wordDelay = duration / numWords;
+    let i = 0;
+    textElement.innerHTML = '';
+    
+    const typingInterval = setInterval(() => {
+        if (i < numWords) {
+            // Append the next word plus a space for proper formatting
+            textElement.innerHTML += words[i] + ' ';
+            i++;
+        } else {
+            // Typing finished
+            clearInterval(typingInterval);
+            if (callback) {
+                callback();
+            }
+        }
+    }, wordDelay);
+}
+
+
+/* * ------------------------------------------------------------------
+* 2. REVEAL AND TRANSITION LOGIC 
+* ------------------------------------------------------------------
+*/
+let autoTransitionTimer = null; // Variable to hold the timer ID
+
+function triggerPoemScreen() {
+    // Crucial check to stop the timer if we transition
+    if (autoTransitionTimer) {
+        clearTimeout(autoTransitionTimer);
+    }
+    
+    // Stop the BGM if it's currently playing during the transition
+    bgm.pause(); 
+    bgm.currentTime = 0;
+    
+    // Apply fade-out classes to trigger animation
+    initialH1.classList.add('fade-out-smooth');
+    initialPLong.classList.add('fade-out-smooth');
+    initialHR.classList.add('fade-out-smooth');
+    continueButton.classList.add('fade-out-smooth');
+    
+    // Also fade out the corner text 
+    document.querySelector('.topleft').style.opacity = 0;
+    document.querySelector('.bottomleft').style.opacity = 0;
+    
+    // Fade out the starry background itself
+    starryBg.style.opacity = 0;
+
+    // Delay showing the poem screen to allow fade-out animation to finish (1.5 seconds)
+    setTimeout(() => {
+        // Completely hide elements
+        starryBg.style.display = 'none';
+
+        // Shows the poem container and fades it in
+        poemContainer.style.display = 'flex';
+        // Force reflow
+        void poemContainer.offsetWidth; 
+        poemContainer.style.opacity = 1;
+        
+        // Starts the music for the poem reveal
+        bgm.play().catch(e => console.error("Audio autoplay failed. Please ensure user interaction (clicking Unveil button) started it.", e));
+
+        // Starts the stanza-by-stanza poem reveal
+        animatePoemReveal();
+    }, 1500); 
+}
+
+function triggerParagraphReveal() {
+    // --- Phase 2: Show paragraph and button (Typing starts here) ---
+    clearInterval(countdownfunction);
+    
+    // Hide countdown and short intro
+    countdownElement.style.display = 'none';
+    initialP.style.display = 'none'; 
+    
+    // Update H1 and apply fade-in
+    initialH1.innerHTML = "Happy Birthday Afiza, My Universe!";
+    initialH1.classList.add('fade-in-smooth');
+    
+    // Show long paragraph container
+    initialPLong.style.display = 'block'; 
+    
+    // --- START TYPING ANIMATION (20 seconds) ---
+    typeWriter(initialPLong, PARAGRAPH_TEXT, TYPING_TIME_MS, () => {
+        // --- CALLBACK: Typing finished. Now show the button and start the 10-second timer ---
+        
+        // Show the button 
+        continueButton.style.display = 'block';
+        continueButton.style.opacity = 1; 
+        
+        // Set a timer to automatically trigger the poem transition after the 10-second hold
+        autoTransitionTimer = setTimeout(triggerPoemScreen, BUTTON_HOLD_TIME_MS);
+        
+        // Update the click handler to clear the auto-transition timer
+        continueButton.onclick = function() {
+            clearTimeout(autoTransitionTimer); // Ensure auto transition is cancelled
+            triggerPoemScreen();
+        };
+    });
+}
+
 
 var countdownfunction = setInterval(function() {
-
     var now = new Date().getTime();
     var distance = countDownDate - now;
 
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Display the result
-    document.getElementById("afiza-countdown").innerHTML = 
-        days + "D " + hours + "H " + minutes + "M " + seconds + "S";
-
-    // If the countdown is over
+    // Trigger the paragraph reveal if the target date has passed (distance is negative)
     if (distance < 0) {
-        clearInterval(countdownfunction);
+        triggerParagraphReveal();
         
-        // Display the final message with that classic Aydin devotion
-        document.getElementById("afiza-countdown").innerHTML = "HAPPY BIRTHDAY CUTIE PIE! YOU ARE MY UNIVERSE,MY BEST FRIEND AND BEST COUSIN !";
+    } else {
+        // --- COUNTDOWN RUNNING (Days/Hours/Minutes/Seconds) ---
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Redirect to a Google search for 'universe'
-        window.location.href = "https://www.google.com/search?q=universe";
+        countdownElement.innerHTML = days + "D " + hours + "H " + minutes + "M " + seconds + "S";
     }
 }, 1000);
+
+
+/* * ------------------------------------------------------------------
+* 3. POEM ANIMATION LOGIC (Stanza by Stanza)
+* ------------------------------------------------------------------
+*/
+function animatePoemReveal() {
+    const stanzas = [
+        document.getElementById('stanza-1'),
+        document.getElementById('stanza-2'),
+        document.getElementById('stanza-3'),
+        document.getElementById('stanza-4'),
+        document.getElementById('final-line')
+    ];
+    
+    let delay = 1000; // Start with a 1-second delay after screen transition
+    const stanzaDelay = 3000; // 3 seconds per stanza
+    
+    stanzas.forEach( (stanza) => {
+        setTimeout( () => {
+            if(stanza) {
+                stanza.classList.add('visible'); // Adds the CSS class to fade in
+            }
+        }, delay);
+        
+        delay += stanzaDelay; // Increment the delay for the next stanza
+    });
+}
 </script>
 
 </body>
 </html>
+
+
